@@ -1,0 +1,102 @@
+@import-normalize;
+
+@font-face {
+  font-family: 'Diodrum';
+  font-style: normal;
+  font-weight: 700;
+  src:  url('./fonts/diodrum/diodrum-bold.woff2') format('woff2'),
+        url('./fonts/diodrum/diodrum-bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Diodrum';
+  font-style: normal;
+  font-weight: 600;
+  src:  url('./fonts/diodrum/diodrum-semibold.woff2') format('woff2'),
+        url('./fonts/diodrum/diodrum-semibold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Diodrum';
+  font-style: normal;
+  font-weight: 500;
+  src:  url('./fonts/diodrum/diodrum-medium.woff2') format('woff2'),
+        url('./fonts/diodrum/diodrum-medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Diodrum';
+  font-style: normal;
+  font-weight: 400;
+  src:  url('./fonts/diodrum/diodrum-regular.woff2') format('woff2'),
+        url('./fonts/diodrum/diodrum-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Diodrum';
+  font-style: italic;
+  font-weight: 600;
+  src:  url('./fonts/diodrum/diodrum-semibolditalic.woff2') format('woff2'),
+        url('./fonts/diodrum/diodrum-semibolditalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Diodrum';
+  font-style: italic;
+  font-weight: 400;
+  src:  url('./fonts/diodrum/diodrum-regularitalic.woff2') format('woff2'),
+        url('./fonts/diodrum/diodrum-regularitalic.woff') format('woff');
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Diodrum', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+#root {
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+
+  &:hover,
+  &:active {
+    cursor: pointer;
+    outline: 0;
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+:root {
+  --white: #fff;
+  --light: #f1f2f3;
+  --silver: #bcc1c5;
+  --silver-95: #e4e6e7;
+  --silver-85: #ced4d9;
+  --silver-15: #242526;
+  --dark: #1c1d1e;
+  --orange: #f48c00;
+  --blue: #00aacc;
+}

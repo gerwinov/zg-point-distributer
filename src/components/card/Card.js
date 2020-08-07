@@ -15,7 +15,7 @@ class Card extends React.Component {
   }
 
   render() {
-    let className = cx({
+    const className = cx({
       card: true,
       active: this.props.active,
     });
@@ -33,7 +33,7 @@ class Card extends React.Component {
         </div>
         <div className={styles.cardcheckbox}>
           <span className={styles.cardcircle} />
-          <span className={styles.cardselecttitle}>Bekijk dit pakket</span>
+          <span className={styles.cardselecttitle}>{ this.props.active ? "Dit wordt 'm" : 'Bekijk dit pakket' }</span>
         </div>
       </button>
     );

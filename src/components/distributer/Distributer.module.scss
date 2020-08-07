@@ -5,9 +5,24 @@
 .description {
   line-height: 36px;
   font-size: 18px;
-  margin: 20px 0 30px 0;
+  margin: 20px 0 30px;
 }
 
 .sliders {
-  margin-top: 30px;
+  margin-top: 40px;
+}
+
+.people {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px -10px 0;
+}
+
+.title {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.progress {
+  margin-top: 40px;
 }

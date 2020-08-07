@@ -16,22 +16,13 @@ class Distributer extends React.Component {
         return acc;
       }, {})
     };
-
-    this.sliders = metrics.map((metric) =>
-      <Slider
-        key={metric.id}
-        name={metric.name}
-        description={metric.description}
-        max={metric.points}
-        onInput={this.calculatePoints} />
-    );
   }
 
   calculatePoints(name, points) {
     const newPoinstPerMetric = {
       ...this.state.pointsPerMetric,
       [name]: points
-    }
+    };
 
     this.setState({
       pointsPerMetric: newPoinstPerMetric,
@@ -40,6 +31,16 @@ class Distributer extends React.Component {
   }
 
   render() {
+    const sliders = metrics.map((metric) =>
+      <Slider
+        key={metric.id}
+        name={metric.name}
+        description={metric.description}
+        max={metric.points}
+        maxPossibleIncrease={this.props.points - this.state.pointsDistributed}
+        onInput={this.calculatePoints} />
+    );
+
     return (
       <div className={styles.distributer}>
         <p className={styles.description}>
@@ -48,7 +49,7 @@ class Distributer extends React.Component {
           In ons <strong>{this.props.packageName}</strong> pakket kun je maximaal <strong>{this.props.points}</strong> gebruiken.
         </p>
         <ProgressBar max={this.props.points} value={this.state.pointsDistributed} />
-        <div className={styles.sliders}>{this.sliders}</div>
+        <div className={styles.sliders}>{sliders}</div>
       </div>
     );
   }

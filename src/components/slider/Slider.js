@@ -18,6 +18,7 @@ function Slider(props) {
           min="0"
           max={props.max}
           step={props.max / 5}
+          defaultValue="0"
           onChange={handleInput} /> {props.max}
       </div>
     );

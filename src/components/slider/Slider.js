@@ -11,7 +11,7 @@ class Slider extends React.Component {
     };
 
     this.explanation = [
-      'Dit wordt niet gebruikt', 'Dit wordt wekelijks gebruikt', 'Dit wordt dagelijks gebruikt', 'Dit wordt meerdere keren per dag gebruikt', 'Dit wordt constant gebruikt'
+      'Dit wordt niet gebruikt', 'Dit wordt af en toe gebruikt', 'Dit wordt wekelijks gebruikt', 'Dit wordt dagelijks gebruikt', 'Dit wordt meerdere keren per dag gebruikt', 'Dit wordt constant gebruikt'
     ];
   }
 

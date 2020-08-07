@@ -7,22 +7,28 @@ class Slider extends React.Component {
     this.handleInput = this.handleInput.bind(this);
 
     this.state = {
-      value: 0
+      step: 0
     };
+
+    this.explanation = [
+      'Dit wordt niet gebruikt', 'Dit wordt wekelijks gebruikt', 'Dit wordt dagelijks gebruikt', 'Dit wordt meerdere keren per dag gebruikt', 'Dit wordt constant gebruikt'
+    ];
   }
 
   handleInput(e) {
-    const newValue = parseInt(e.target.value, 10);
+    const newStep = e.target.value;
 
-    if (newValue - this.state.value > this.props.maxPossibleIncrease) {
+    const pointsPerStep = this.props.max / 5
+
+    if ((newStep * pointsPerStep) - (this.state.step * pointsPerStep) > this.props.maxPossibleIncrease) {
       alert('hier een melding dat je beter het volgende pakket kunt nemen!')
       return;
     }
 
     this.setState({
-      value: newValue
+      step: newStep
     });
-    this.props.onInput(this.props.name, newValue);
+    this.props.onInput(this.props.id, newStep);
   }
 
   render() {
@@ -36,10 +42,11 @@ class Slider extends React.Component {
           className={styles.slider}
           name={`slider-${this.props.name}`}
           min="0"
-          max={this.props.max}
-          step={this.props.max / 5}
-          value={this.state.value}
-          onChange={this.handleInput} /> Erg vaak ({this.props.max} punten)
+          max="5"
+          step="1"
+          defaultValue="0"
+          onChange={this.handleInput} /> Elke dag ({this.props.max} punten)
+          <span className={styles.explanation}>{this.explanation[this.state.step]}</span>
       </div>
     );
   }

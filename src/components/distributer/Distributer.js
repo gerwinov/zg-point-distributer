@@ -15,11 +15,12 @@ class Distributer extends React.Component {
     super(props);
     this.calculatePoints = this.calculatePoints.bind(this);
     this.setPeopleAmount = this.setPeopleAmount.bind(this);
+    this.setSteps = this.setSteps.bind(this);
 
     this.state = {
       pointsDistributed: 0,
-      pointsPerMetric: metrics.map((metrid) => metrid.name).reduce((acc, curr) => {
-        acc[curr] = 0;
+      stepsPerMetric: metrics.map((metrid) => metrid.id).reduce((acc, curr) => {
+        acc[curr] = 0
         return acc;
       }, {}),
       amountOfPeople: 1
@@ -30,15 +31,28 @@ class Distributer extends React.Component {
     ];
   }
 
-  calculatePoints(name, points) {
-    const newPoinstPerMetric = {
-      ...this.state.pointsPerMetric,
-      [name]: points
+  setSteps(id, step) {
+    const newStepsPerMetric = {
+      ...this.state.stepsPerMetric,
+      [id]: parseInt(step,10)
     };
 
     this.setState({
-      pointsPerMetric: newPoinstPerMetric,
-      pointsDistributed: Object.values(newPoinstPerMetric).reduce((a, b) => a + b)
+      stepsPerMetric: newStepsPerMetric,
+    });
+
+    this.calculatePoints(newStepsPerMetric, this.state.amountOfPeople);
+  }
+
+  calculatePoints(steps, people) {
+    let total = 0;
+
+    metrics.forEach((metric) => {
+      total += (metric.points / 5) * (people * 0.5) * steps[metric.id]
+    });
+
+    this.setState({
+      pointsDistributed: total
     });
   }
 
@@ -46,23 +60,27 @@ class Distributer extends React.Component {
     this.setState({
       amountOfPeople: amount
     });
+
+    this.calculatePoints(this.state.stepsPerMetric, amount);
   }
 
   render() {
     const sliders = metrics.map((metric) =>
       <Slider
         key={metric.id}
+        id={metric.id}
         name={metric.name}
         description={metric.description}
         max={metric.points * (this.state.amountOfPeople * 0.5)}
         maxPossibleIncrease={this.props.points - this.state.pointsDistributed}
-        onInput={this.calculatePoints} />
+        onInput={this.setSteps} />
     );
 
     let radioButtons = [];
     for (let i = 0; i < 4; i++) {
       radioButtons.push(
         <RadioButton
+          key={`radio-${i}`}
           name="people"
           value={i+1}
           displayValue={i === 3 ? `${i+1}+` : i+1}

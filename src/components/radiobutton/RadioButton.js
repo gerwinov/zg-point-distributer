@@ -10,7 +10,7 @@ class RadioButton extends React.Component {
     this.handleInput = this.handleInput.bind(this);
   }
 
-  handleInput(e) {
+  handleInput() {
     this.props.onInput(this.props.value);
   }
 
@@ -27,7 +27,7 @@ class RadioButton extends React.Component {
           id={`${this.props.name}-${this.props.value}`}
           name={this.props.name}
           value={this.props.value}
-          checked={this.props.checked}
+          defaultChecked={this.props.checked}
           className={styles.input}
           onClick={this.handleInput} />
         <label htmlFor={`${this.props.name}-${this.props.value}`} className={styles.label}>

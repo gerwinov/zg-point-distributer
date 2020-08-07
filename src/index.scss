@@ -86,11 +86,12 @@ button {
 }
 
 input[type=range] {
-  -webkit-appearance: none;
+  appearance: none;
   background: transparent;
 
+  &::-webkit-slider-runnable-track,
   &::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    appearance: none;
   }
 
   &:focus {

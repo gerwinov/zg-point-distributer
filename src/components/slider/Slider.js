@@ -30,7 +30,7 @@ class Slider extends React.Component {
       <div>
         <label htmlFor={`slider-${this.props.name}`}><strong>{this.props.name}</strong></label>
         <p className={styles.description}>{this.props.description}</p>
-        0 <input
+        Nooit (0 punten) <input
           type="range"
           id={`slider-${this.props.name}`}
           className={styles.slider}
@@ -39,7 +39,7 @@ class Slider extends React.Component {
           max={this.props.max}
           step={this.props.max / 5}
           value={this.state.value}
-          onChange={this.handleInput} /> {this.props.max}
+          onChange={this.handleInput} /> Erg vaak ({this.props.max} punten)
       </div>
     );
   }

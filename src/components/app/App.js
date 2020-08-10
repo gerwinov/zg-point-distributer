@@ -13,14 +13,14 @@ class App extends React.Component {
     this.determinePackage = this.determinePackage.bind(this);
     this.clearToast = this.clearToast.bind(this);
     this.state = {
-      activeCard: 'start',
+      activeCard: 0,
       pointsDistributed: 0,
       toastMessage: ''
     };
   }
 
   setActiveCard(name) {
-    const packageId = name.toLowerCase();
+    const packageId = packages.findIndex((pack) => pack.name === name);
     if (packages[packageId]) {
       this.setState({
         activeCard: packageId
@@ -39,12 +39,11 @@ class App extends React.Component {
   }
 
   pointsWarning(packagePoints, distributedPoints) {
-    // To do: set nextPackage based on Id after refactor of packages / cards.
-    const nextPackage = 'Giga';
+    const nextPackage = packages.find((pack) => pack.points > distributedPoints)
     if (packagePoints < distributedPoints) {
-      this.setActiveCard(nextPackage);
+      this.setActiveCard(nextPackage.name);
       this.setState({
-        toastMessage: `We hebben je pakket aangepast naar "${nextPackage}" zodat je genoeg punten hebt om te verdelen.`
+        toastMessage: `We hebben je pakket aangepast naar "${nextPackage.name}" zodat je genoeg punten hebt om te verdelen.`
       });
       return true;
     }
@@ -58,27 +57,19 @@ class App extends React.Component {
   }
 
   render() {
+    const cards = packages.map((pack, index) =>
+      <Card
+        package={pack}
+        key={`card-${index}`}
+        active={this.state.activeCard === index}
+        onCardClick={this.setActiveCard} />
+    );
     return (
       <div>
         <Header />
         <div className={styles.app}>
           <div className={styles.packages}>
-            <Card
-              package={packages.start}
-              active={this.state.activeCard === 'start'}
-              onCardClick={this.setActiveCard} />
-            <Card
-              package={packages.complete}
-              active={this.state.activeCard === 'complete'}
-              onCardClick={this.setActiveCard} />
-            <Card
-              package={packages.max}
-              active={this.state.activeCard === 'max'}
-              onCardClick={this.setActiveCard} />
-            <Card
-              package={packages.giga}
-              active={this.state.activeCard === 'giga'}
-              onCardClick={this.setActiveCard} />
+            { cards }
           </div>
           <Distributer
             points={packages[this.state.activeCard].points}

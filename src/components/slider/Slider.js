@@ -16,19 +16,10 @@ class Slider extends React.Component {
   }
 
   handleInput(e) {
-    const newStep = e.target.value;
-
-    const pointsPerStep = this.props.max / 5
-
-    if ((newStep * pointsPerStep) - (this.state.step * pointsPerStep) > this.props.maxPossibleIncrease) {
-      alert('hier een melding dat je beter het volgende pakket kunt nemen!')
-      return;
-    }
-
     this.setState({
-      step: newStep
+      step: e.target.value
     });
-    this.props.onInput(this.props.id, newStep);
+    this.props.onInput(this.props.id, e.target.value);
   }
 
   render() {

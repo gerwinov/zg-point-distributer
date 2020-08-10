@@ -18,7 +18,6 @@ class Distributer extends React.Component {
     this.setSteps = this.setSteps.bind(this);
 
     this.state = {
-      pointsDistributed: 0,
       stepsPerMetric: metrics.map((metrid) => metrid.id).reduce((acc, curr) => {
         acc[curr] = 0
         return acc;
@@ -51,9 +50,7 @@ class Distributer extends React.Component {
       total += (metric.points / 5) * (people * 0.5) * steps[metric.id]
     });
 
-    this.setState({
-      pointsDistributed: total
-    });
+    this.props.onPointsUpdate(total);
   }
 
   setPeopleAmount(amount) {
@@ -72,7 +69,6 @@ class Distributer extends React.Component {
         name={metric.name}
         description={metric.description}
         max={metric.points * (this.state.amountOfPeople * 0.5)}
-        maxPossibleIncrease={this.props.points - this.state.pointsDistributed}
         onInput={this.setSteps} />
     );
 
@@ -103,7 +99,7 @@ class Distributer extends React.Component {
         </div>
         <div className={styles.progress}>
           <h2 className={styles.title}>Te verdelen punten</h2>
-          <ProgressBar max={this.props.points} value={this.state.pointsDistributed} />
+          <ProgressBar max={this.props.points} value={this.props.pointsDistributed} />
         </div>
         <div className={styles.sliders}>
           <h2 className={styles.title}>Wat {this.state.amountOfPeople > 1 ? 'doen jullie' : 'doe je'} graag online?</h2>

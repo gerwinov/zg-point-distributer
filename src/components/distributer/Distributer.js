@@ -98,7 +98,6 @@ class Distributer extends React.Component {
           {radioButtons}
         </div>
         <div className={styles.progress}>
-          <h2 className={styles.title}>Te verdelen punten</h2>
           <ProgressBar max={this.props.points} value={this.props.pointsDistributed} />
         </div>
         <div className={styles.sliders}>

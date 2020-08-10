@@ -1,19 +1,25 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .progressbar{
   width: 100%;
   animation: animate-stripes 5s linear infinite;
 
   &[value] {
     appearance: none;
-    height: 10px;
+    height: 20px;
 
     &::-webkit-progress-bar {
-      background-color: var(--silver-85);
-      border-radius: 8px;
+      background-color: var(--silver-95);
+      border-radius: 4px;
     }
 
     &::-webkit-progress-value {
-      background-image: linear-gradient(to right, var(--orange) 0%, var(--orange-darken) 154%);
-      border-radius: 8px;
+      background-image: linear-gradient(to right, var(--orange-lighten) 34%, var(--orange-darken) 99%);
+      border-radius: 4px;
       transition: width 0.5s;
     }
   }

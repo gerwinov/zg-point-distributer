@@ -4,7 +4,10 @@ import styles from './ProgressBar.module.scss';
 function ProgressBar(props) {
     return (
       <div>
-        <label htmlFor="progressbar">Punten: <strong>{props.value}</strong>/<strong>{props.max}</strong></label>
+        <div className={styles.wrapper}>
+          <h2 className={styles.title}>Verdeelde punten</h2>
+          <label htmlFor="progressbar"><strong>{props.value}</strong>/<strong>{props.max}</strong> punten</label>
+        </div>
         <progress
           id="progressbar"
           className={styles.progressbar}

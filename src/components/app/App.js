@@ -12,47 +12,81 @@ class App extends React.Component {
     this.setActiveCard = this.setActiveCard.bind(this);
     this.determinePackage = this.determinePackage.bind(this);
     this.clearToast = this.clearToast.bind(this);
+    this.packageCheck = this.packageCheck.bind(this)
     this.state = {
       activeCard: 0,
       pointsDistributed: 0,
-      toastMessage: ''
+      toastMessages: []
     };
   }
 
   setActiveCard(name) {
+    this.removeAllToasts();
+
     const packageId = packages.findIndex((pack) => pack.name === name);
     if (packages[packageId]) {
+      if (packages[packageId].points < this.state.pointsDistributed) {
+        this.setState(state => {
+          const message = `Je kunt niet kiezen voor "${packages[packageId].name}" omdat je daarvoor teveel punten hebt verdeeld.`;
+          if (state.toastMessages.includes(message)) {
+            return
+          }
+          state.toastMessages.push(message);
+          this.forceUpdate(); //Needed because render function doesn't pick up array change. Should refactor later!
+        });
+        return
+      }
       this.setState({
-        activeCard: packageId
+        activeCard: packageId,
       });
-
-      this.pointsWarning(packages[packageId].points, this.state.pointsDistributed);
     }
   }
 
   determinePackage(points) {
-    this.pointsWarning(packages[this.state.activeCard].points, points);
-
     this.setState({
       pointsDistributed: points
     });
+
+    this.packageCheck(packages[this.state.activeCard].points, points);
   }
 
-  pointsWarning(packagePoints, distributedPoints) {
-    const nextPackage = packages.find((pack) => pack.points > distributedPoints)
+  packageCheck(packagePoints, distributedPoints) {
+    this.removeAllToasts();
+
+    const requiredPackage = packages.find((pack) => pack.points >= distributedPoints)
     if (packagePoints < distributedPoints) {
-      this.setActiveCard(nextPackage.name);
-      this.setState({
-        toastMessage: `We hebben je pakket aangepast naar "${nextPackage.name}" zodat je genoeg punten hebt om te verdelen.`
+      this.setActiveCard(requiredPackage.name);
+      this.setState(state => {
+        const message = `We hebben je pakket aangepast naar "${requiredPackage.name}" zodat je genoeg punten hebt om te verdelen.`;
+        if (state.toastMessages.includes(message)) {
+          return
+        }
+        state.toastMessages.push(message);
       });
-      return true;
+      return
     }
-    return false;
+
+    if (requiredPackage.points !== packagePoints && distributedPoints > 0) {
+      this.setState(state => {
+        const message = `Op basis van het aantal verdeelde punten zou je ook kunnen kijken naar ons "${requiredPackage.name}" pakket.`;
+        if (state.toastMessages.includes(message)) {
+          return
+        }
+        state.toastMessages.push(message);
+      });
+    }
   }
 
-  clearToast() {
+  clearToast(message) {
+    const messages = this.state.toastMessages.filter((el) => el !== message);
     this.setState({
-      toastMessage: ''
+      toastMessages: messages
+    });
+  }
+
+  removeAllToasts(){
+    this.setState({
+      toastMessages: []
     });
   }
 
@@ -63,6 +97,9 @@ class App extends React.Component {
         key={`card-${index}`}
         active={this.state.activeCard === index}
         onCardClick={this.setActiveCard} />
+    );
+    const toasts = this.state.toastMessages.map((message, index) =>
+      <Toast key={`toast-${index}${Date.now()}`} message={message} onClose={this.clearToast} />
     );
     return (
       <div>
@@ -76,7 +113,7 @@ class App extends React.Component {
             packageName={packages[this.state.activeCard].name}
             pointsDistributed={this.state.pointsDistributed}
             onPointsUpdate={this.determinePackage} />
-          <Toast message={this.state.toastMessage} onClose={this.clearToast} />
+          <div className={styles.toastcontainer}>{ toasts }</div>
         </div>
       </div>
     );

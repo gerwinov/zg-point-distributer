@@ -12,6 +12,9 @@ import iconPeople4 from '../../assets/people-4.svg'
 
 import iconStream from '../../assets/streaming.png'
 import iconGaming from '../../assets/gaming.png'
+import iconVideocalling from '../../assets/videocalling.png'
+import iconSurfing from '../../assets/surfing.png'
+import iconDownloading from '../../assets/downloading.png'
 
 class Distributer extends React.Component {
   constructor(props) {
@@ -34,7 +37,10 @@ class Distributer extends React.Component {
 
     this.sliderIcons = {
       streaming: iconStream,
-      gaming: iconGaming
+      gaming: iconGaming,
+      downloading: iconDownloading,
+      videocalling: iconVideocalling,
+      surfing: iconSurfing
     }
   }
 

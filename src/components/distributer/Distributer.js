@@ -94,9 +94,13 @@ class Distributer extends React.Component {
           key={`radio-${i}`}
           name="people"
           value={i+1}
-          displayValue={i === 3 ? `${i+1}+` : i+1}
-          icon={this.icons[i]}
           checked={i+1 === this.state.amountOfPeople}
+          content={
+            <div>
+              <img className={styles.radioicon} src={this.icons[i]} alt="peeps_logo" />
+              <h2 className={styles.radiotext}>{i === 3 ? `${i+1}+` : i+1}</h2>
+            </div>
+          }
           onInput={this.setPeopleAmount} />
       )
     }

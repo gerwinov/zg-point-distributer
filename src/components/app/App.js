@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './App.module.scss';
 import packages from '../../globals/packages';
-import Card from '../card/Card';
+import RadioButton from '../radiobutton/RadioButton';
 import Distributer from '../distributer/Distributer';
 import Header from '../header/Header';
 import Toast from '../toast/Toast';
@@ -81,11 +81,23 @@ class App extends React.Component {
 
   render() {
     const cards = packages.map((pack, index) =>
-      <Card
-        package={pack}
+      <RadioButton
         key={`card-${index}`}
-        active={this.state.activeCard === index}
-        onCardClick={this.setActiveCard} />
+        name="people"
+        value={pack.name}
+        checked={this.state.activeCard === index}
+        content={
+          <div>
+            <h1 className={styles.cardtype}>Internet</h1>
+            <h2 className={styles.cardtitle}>{pack.name}</h2>
+            <hr className={styles.cardruler} />
+            <p><strong>{pack.downloadSpeed}</strong> Mbit/s download</p>
+            <p><strong>{pack.uploadSpeed} </strong>Mbit/s upload</p>
+            <p>Internetbeveiliging</p>
+            <p>Gegarandeerd perfecte wifi</p>
+          </div>
+        }
+        onInput={this.setActiveCard} />
     );
     const toasts = this.state.toastMessages.map((message, index) =>
       <Toast key={`toast-${message}`} message={message} onClose={this.clearToast} />

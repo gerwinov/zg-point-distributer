@@ -25,8 +25,7 @@ function RadioButton(props) {
         className={styles.input}
         onClick={handleInput} />
       <label htmlFor={`${props.name}-${props.value}`} className={styles.label}>
-        <img className={styles.icon} src={props.icon} alt="peeps_logo" />
-        <h2 className={styles.text}>{ props.displayValue }</h2>
+        { props.content }
         <span className={styles.circle} />
       </label>
     </div>

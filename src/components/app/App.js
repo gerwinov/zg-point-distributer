@@ -83,7 +83,7 @@ class App extends React.Component {
     const cards = packages.map((pack, index) =>
       <RadioButton
         key={`card-${index}`}
-        name="people"
+        name="package"
         value={pack.name}
         checked={this.state.activeCard === index}
         content={

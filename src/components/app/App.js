@@ -28,6 +28,7 @@ class App extends React.Component {
     if (packages[packageId]) {
       if (packages[packageId].points < this.state.pointsDistributed) {
         this.addToast(`Je kunt niet kiezen voor "${packages[packageId].name}" omdat je daarvoor teveel punten hebt verdeeld.`);
+        return;
       }
       this.setState({
         activeCard: packageId,
@@ -45,6 +46,7 @@ class App extends React.Component {
     if (packages[this.state.activeCard].points < points) {
       this.setActiveCard(requiredPackage.name);
       this.addToast(`We hebben je pakket aangepast naar "${requiredPackage.name}" zodat je genoeg punten hebt om te verdelen.`);
+      return;
     }
 
     if (requiredPackage.points !== packages[this.state.activeCard].points && points > 0 && this.state.showLowerPackageToast) {

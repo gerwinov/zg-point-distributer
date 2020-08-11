@@ -107,7 +107,7 @@ class Distributer extends React.Component {
           {radioButtons}
         </div>
         <div className={styles.progress}>
-          <ProgressBar max={this.props.points} value={this.props.pointsDistributed} />
+          <ProgressBar max={this.props.points} packageName={this.props.packageName} value={this.props.pointsDistributed} />
         </div>
         <div className={styles.sliders}>
           <h1 className={styles.title}>Wat {this.state.amountOfPeople > 1 ? 'doen jullie' : 'doe je'} graag online?</h1>

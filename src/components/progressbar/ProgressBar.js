@@ -5,7 +5,7 @@ function ProgressBar(props) {
     return (
       <div>
         <div className={styles.wrapper}>
-          <h2 className={styles.title}>Verdeelde punten</h2>
+          <span className={styles.titlewrapper}><h2 className={styles.title}>Verdeelde punten</h2><span>(je geselecteerde pakket:{ props.packageName })</span></span>
           <label htmlFor="progressbar"><strong>{props.value}</strong>/<strong>{props.max}</strong> punten</label>
         </div>
         <progress

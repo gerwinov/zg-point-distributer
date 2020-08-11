@@ -4,6 +4,15 @@
   align-items: center;
 }
 
+.titlewrapper {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin-right: 5px;
+}
+
 .progressbar{
   width: 100%;
   animation: animate-stripes 5s linear infinite;

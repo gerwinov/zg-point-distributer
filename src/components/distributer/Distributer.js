@@ -1,7 +1,7 @@
 import React from 'react';
 import ProgressBar from '../progressbar/ProgressBar';
 import RadioButton from '../radiobutton/RadioButton';
-import Slider from '../slider/Slider';
+import Metric from '../metric/Metric';
 import metrics from '../../globals/metrics';
 import styles from './Distributer.module.scss';
 
@@ -77,7 +77,7 @@ class Distributer extends React.Component {
 
   render() {
     const sliders = metrics.map((metric) =>
-      <Slider
+      <Metric
         key={metric.id}
         id={metric.id}
         name={metric.name}
@@ -125,7 +125,7 @@ class Distributer extends React.Component {
         </div>
         <div className={styles.block}>
           <h1 className={styles.title}>Dit pakket bestellen?</h1>
-          <p>Bestel nu direct je <strong>{this.props.packageName}</strong> pakket. Het is in 5 minuten gergeld. Beloofd.</p>
+          <p>Bestel nu direct je <strong>{this.props.packageName}</strong> pakket. Het is in 5 minuten geregeld. Beloofd.</p>
           <button className={styles.cta}>Bestel direct</button>
         </div>
       </div>

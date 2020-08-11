@@ -5,6 +5,7 @@ import RadioButton from '../radiobutton/RadioButton';
 import Distributer from '../distributer/Distributer';
 import Header from '../header/Header';
 import Toast from '../toast/Toast';
+import FixedMessage from '../fixedmessage/FixedMessage';
 
 class App extends React.Component {
   constructor(props) {
@@ -100,7 +101,7 @@ class App extends React.Component {
         onInput={this.setActiveCard} />
     );
     const toasts = this.state.toastMessages.map((message) =>
-      <Toast key={`toast-${message}`} message={message} timer fixed onClose={this.clearToast} />
+      <Toast key={`toast-${message}`} timer message={message} onClose={this.clearToast} />
     );
     return (
       <div>
@@ -114,7 +115,7 @@ class App extends React.Component {
             packageName={packages[this.state.activeCard].name}
             pointsDistributed={this.state.pointsDistributed}
             onPointsUpdate={this.determinePackage} />
-          { toasts }
+          <FixedMessage content={ toasts } />
         </div>
       </div>
     );

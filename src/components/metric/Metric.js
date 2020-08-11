@@ -54,7 +54,7 @@ class Metric extends React.Component {
           </div>
         </div>
         {this.state.showDescription &&
-          <Toast message={this.props.description} onClose={this.toggleDescription} />
+          <Toast message={this.props.description} triangleAbove onClose={this.toggleDescription} />
         }
       </div>
     );

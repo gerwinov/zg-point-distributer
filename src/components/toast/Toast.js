@@ -31,21 +31,20 @@ class Toast extends React.Component {
 
   render() {
     let className = cx({
-      fixed: this.props.fixed,
+      container: true,
+      triangle: this.props.triangleAbove,
     });
 
     return (
       <div className={className}>
-        <div className={styles.container}>
-          <div className={styles.frame}>
-            <img className={styles.img} src={infoIcon} alt="info" />
-            <span className={styles.message}>{ this.props.message }</span>
-            <button className={styles.close} onClick={this.close}>
-              <img className={styles.closeImg} src={closeIcon} alt="sluiten" />
-            </button>
-          </div>
-          {this.props.timer && <div className={styles.timer} /> }
+        <div className={styles.frame}>
+          <img className={styles.img} src={infoIcon} alt="info" />
+          <span className={styles.message}>{ this.props.message }</span>
+          <button className={styles.close} onClick={this.close}>
+            <img className={styles.closeImg} src={closeIcon} alt="sluiten" />
+          </button>
         </div>
+        {this.props.timer && <div className={styles.timer} /> }
       </div>
     );
   }

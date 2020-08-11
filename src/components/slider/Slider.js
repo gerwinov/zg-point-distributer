@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './Slider.module.scss';
-import infoIcon from '../../assets/info.svg'
-import closeIcon from '../../assets/close.svg'
-import helpIcon from '../../assets/help.svg'
+import helpIcon from '../../assets/help.svg';
+import Toast from '../toast/Toast';
 
 class Slider extends React.Component {
   constructor(props) {
@@ -63,13 +62,7 @@ class Slider extends React.Component {
           </div>
         </div>
         {this.state.showDescription &&
-          <div className={styles.description}>
-            <img className={styles.descriptionimg} src={infoIcon} alt="info" />
-            <span>{ this.props.description }</span>
-            <button className={styles.close} onClick={this.toggleDescription}>
-              <img className={styles.closeImg} src={closeIcon} alt="sluiten" />
-            </button>
-          </div>
+          <Toast message={this.props.description} onClose={this.toggleDescription} />
         }
       </div>
     );

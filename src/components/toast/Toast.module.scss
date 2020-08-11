@@ -1,23 +1,41 @@
+.fixed {
+  position: fixed;
+  top: 5px;
+  right: 10px;
+
+  > .container::after {
+    display: none;
+  }
+}
+
 .container {
   background-color: var(--orange);
-  overflow: hidden;
   position: relative;
   margin-top: 5px;
   border-radius: 5px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   animation: open-toast 0.3s linear;
   z-index: 100;
+
+  :not(.fixed) &::after {
+    position: absolute;
+    background-color: var(--orange);
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    height: 30px;
+    width: 30px;
+    content: '';
+  }
 }
 
 .frame {
-  padding: 5px 15px;
+  padding: 20px 15px;
   display: flex;
   min-width: 100px;
-  height: 60px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .img {

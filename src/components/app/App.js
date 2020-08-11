@@ -99,8 +99,8 @@ class App extends React.Component {
         }
         onInput={this.setActiveCard} />
     );
-    const toasts = this.state.toastMessages.map((message, index) =>
-      <Toast key={`toast-${message}`} message={message} onClose={this.clearToast} />
+    const toasts = this.state.toastMessages.map((message) =>
+      <Toast key={`toast-${message}`} message={message} timer fixed onClose={this.clearToast} />
     );
     return (
       <div>
@@ -114,7 +114,7 @@ class App extends React.Component {
             packageName={packages[this.state.activeCard].name}
             pointsDistributed={this.state.pointsDistributed}
             onPointsUpdate={this.determinePackage} />
-          <div className={styles.toastcontainer}>{ toasts }</div>
+          { toasts }
         </div>
       </div>
     );

@@ -14,6 +14,8 @@ class App extends React.Component {
     this.determinePackage = this.determinePackage.bind(this);
     this.clearToast = this.clearToast.bind(this);
     this.addToast = this.addToast.bind(this);
+    this.removeAllToasts = this.removeAllToasts.bind(this);
+
     this.state = {
       activeCard: 0,
       pointsDistributed: 0,

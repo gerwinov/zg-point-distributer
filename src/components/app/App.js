@@ -16,7 +16,8 @@ class App extends React.Component {
     this.state = {
       activeCard: 0,
       pointsDistributed: 0,
-      toastMessages: []
+      toastMessages: [],
+      showLowerPackageToast: true
     };
   }
 
@@ -32,12 +33,12 @@ class App extends React.Component {
             return
           }
           state.toastMessages.push(message);
-          this.forceUpdate(); //Needed because render function doesn't pick up array change. Should refactor later!
         });
         return
       }
       this.setState({
         activeCard: packageId,
+        showLowerPackageToast: true
       });
     }
   }
@@ -51,7 +52,7 @@ class App extends React.Component {
   }
 
   packageCheck(packagePoints, distributedPoints) {
-    this.removeAllToasts();
+    // this.removeAllToasts();
 
     const requiredPackage = packages.find((pack) => pack.points >= distributedPoints)
     if (packagePoints < distributedPoints) {
@@ -66,13 +67,14 @@ class App extends React.Component {
       return
     }
 
-    if (requiredPackage.points !== packagePoints && distributedPoints > 0) {
+    if (requiredPackage.points !== packagePoints && distributedPoints > 0 && this.state.showLowerPackageToast) {
       this.setState(state => {
         const message = `Op basis van het aantal verdeelde punten zou je ook kunnen kijken naar ons "${requiredPackage.name}" pakket.`;
         if (state.toastMessages.includes(message)) {
           return
         }
         state.toastMessages.push(message);
+        state.showLowerPackageToast = false;
       });
     }
   }
@@ -99,7 +101,7 @@ class App extends React.Component {
         onCardClick={this.setActiveCard} />
     );
     const toasts = this.state.toastMessages.map((message, index) =>
-      <Toast key={`toast-${index}${Date.now()}`} message={message} onClose={this.clearToast} />
+      <Toast key={`toast-${message}`} message={message} onClose={this.clearToast} />
     );
     return (
       <div>

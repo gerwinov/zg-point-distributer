@@ -1,7 +1,9 @@
 import React from 'react';
+
+import Metric from '../metric/Metric';
 import ProgressBar from '../progressbar/ProgressBar';
 import RadioButton from '../radiobutton/RadioButton';
-import Metric from '../metric/Metric';
+
 import metrics from '../../globals/metrics';
 import styles from './Distributer.module.scss';
 

@@ -1,8 +1,10 @@
 import React from 'react';
+
 import styles from './Toast.module.scss';
-import infoIcon from '../../assets/info.svg'
-import closeIcon from '../../assets/close.svg'
+
 import classNames from 'classnames/bind';
+import closeIcon from '../../assets/close.svg';
+import infoIcon from '../../assets/info.svg';
 
 const cx = classNames.bind(styles);
 

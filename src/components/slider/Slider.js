@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './Slider.module.scss';
 
 function Slider(props) {

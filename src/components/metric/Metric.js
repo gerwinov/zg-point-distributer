@@ -1,8 +1,11 @@
 import React from 'react';
-import styles from './Metric.module.scss';
-import helpIcon from '../../assets/help.svg';
-import Toast from '../toast/Toast';
+
 import Slider from '../slider/Slider';
+import Toast from '../toast/Toast';
+
+import styles from './Metric.module.scss';
+
+import helpIcon from '../../assets/help.svg';
 
 class Metric extends React.Component {
   constructor(props) {

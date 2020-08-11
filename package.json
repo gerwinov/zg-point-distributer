@@ -2,6 +2,7 @@
   "name": "point-distributer",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://gerwinov.github.io/zg-point-distributer",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -17,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "push-dir --dir=build --branch=gh-pages --cleanup"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,6 +36,6 @@
     ]
   },
   "devDependencies": {
-    "push-dir": "^0.4.1"
+    "gh-pages": "^3.1.0"
   }
 }

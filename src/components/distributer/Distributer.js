@@ -10,6 +10,9 @@ import iconPeople2 from '../../assets/people-2.svg'
 import iconPeople3 from '../../assets/people-3.svg'
 import iconPeople4 from '../../assets/people-4.svg'
 
+import iconStream from '../../assets/streaming.png'
+import iconGaming from '../../assets/gaming.png'
+
 class Distributer extends React.Component {
   constructor(props) {
     super(props);
@@ -28,6 +31,11 @@ class Distributer extends React.Component {
     this.icons = [
       iconPeople1, iconPeople2, iconPeople3, iconPeople4
     ];
+
+    this.sliderIcons = {
+      streaming: iconStream,
+      gaming: iconGaming
+    }
   }
 
   setSteps(id, step) {
@@ -69,6 +77,7 @@ class Distributer extends React.Component {
         name={metric.name}
         description={metric.description}
         max={metric.points * (this.state.amountOfPeople * 0.5)}
+        icon={this.sliderIcons[metric.id]}
         onInput={this.setSteps} />
     );
 
@@ -101,7 +110,7 @@ class Distributer extends React.Component {
           <ProgressBar max={this.props.points} value={this.props.pointsDistributed} />
         </div>
         <div className={styles.sliders}>
-          <h2 className={styles.title}>Wat {this.state.amountOfPeople > 1 ? 'doen jullie' : 'doe je'} graag online?</h2>
+          <h1 className={styles.title}>Wat {this.state.amountOfPeople > 1 ? 'doen jullie' : 'doe je'} graag online?</h1>
           {sliders}
         </div>
       </div>

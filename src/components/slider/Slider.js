@@ -1,17 +1,22 @@
 import React from 'react';
 import styles from './Slider.module.scss';
+import infoIcon from '../../assets/info.svg'
+import closeIcon from '../../assets/close.svg'
+import helpIcon from '../../assets/help.svg'
 
 class Slider extends React.Component {
   constructor(props) {
     super(props);
     this.handleInput = this.handleInput.bind(this);
+    this.toggleDescription = this.toggleDescription.bind(this);
 
     this.state = {
-      step: 0
+      step: 0,
+      showDescription: false
     };
 
     this.explanation = [
-      'Dit wordt niet gebruikt', 'Dit wordt af en toe gebruikt', 'Dit wordt wekelijks gebruikt', 'Dit wordt dagelijks gebruikt', 'Dit wordt meerdere keren per dag gebruikt', 'Dit wordt constant gebruikt'
+      'Nooit', 'Af en toe', 'Wekelijks', 'Dagelijks', 'Meerdere keren per dag', 'Constant'
     ];
   }
 
@@ -22,22 +27,50 @@ class Slider extends React.Component {
     this.props.onInput(this.props.id, e.target.value);
   }
 
+  toggleDescription() {
+    const value = !this.state.showDescription;
+
+    this.setState({
+      showDescription: value
+    });
+  }
+
   render() {
     return (
       <div>
-        <label htmlFor={`slider-${this.props.name}`}><strong>{this.props.name}</strong></label>
-        <p className={styles.description}>{this.props.description}</p>
-        Nooit (0 punten) <input
-          type="range"
-          id={`slider-${this.props.name}`}
-          className={styles.slider}
-          name={`slider-${this.props.name}`}
-          min="0"
-          max="5"
-          step="1"
-          defaultValue="0"
-          onChange={this.handleInput} /> Elke dag ({this.props.max} punten)
-          <span className={styles.explanation}>{this.explanation[this.state.step]}</span>
+        <div className={styles.wrapper}>
+          <img className={styles.image} src={this.props.icon} alt="icon" />
+          <div className={styles.contentwrapper}>
+            <label className={styles.label} htmlFor={`slider-${this.props.name}`}>
+              <span>
+                <strong>{this.props.name}</strong>
+                <button className={styles.helpbutton} onClick={this.toggleDescription}>
+                  <img className={styles.helpimage} src={helpIcon} alt="help" />
+                </button>
+              </span>
+              <span>({`${this.explanation[this.state.step]} ${(this.props.max / 5) * this.state.step}`} punten)</span>
+            </label>
+            <input
+              type="range"
+              id={`slider-${this.props.name}`}
+              className={styles.slider}
+              name={`slider-${this.props.name}`}
+              min="0"
+              max="5"
+              step="1"
+              defaultValue="0"
+              onChange={this.handleInput} />
+          </div>
+        </div>
+        {this.state.showDescription &&
+          <div className={styles.description}>
+            <img className={styles.descriptionimg} src={infoIcon} alt="info" />
+            <span>{ this.props.description }</span>
+            <button className={styles.close} onClick={this.toggleDescription}>
+              <img className={styles.closeImg} src={closeIcon} alt="sluiten" />
+            </button>
+          </div>
+        }
       </div>
     );
   }

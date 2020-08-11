@@ -106,12 +106,17 @@ class Distributer extends React.Component {
         <div className={styles.people}>
           {radioButtons}
         </div>
-        <div className={styles.progress}>
+        <div className={styles.block}>
           <ProgressBar max={this.props.points} packageName={this.props.packageName} value={this.props.pointsDistributed} />
         </div>
-        <div className={styles.sliders}>
+        <div className={styles.block}>
           <h1 className={styles.title}>Wat {this.state.amountOfPeople > 1 ? 'doen jullie' : 'doe je'} graag online?</h1>
           {sliders}
+        </div>
+        <div className={styles.block}>
+          <h1 className={styles.title}>Dit pakket bestellen?</h1>
+          <p>Bestel nu direct je <strong>{this.props.packageName}</strong> pakket. Het is in 5 minuten gergeld. Beloofd.</p>
+          <button className={styles.cta}>Bestel direct</button>
         </div>
       </div>
     );

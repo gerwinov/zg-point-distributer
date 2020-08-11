@@ -12,7 +12,7 @@ class App extends React.Component {
     this.setActiveCard = this.setActiveCard.bind(this);
     this.determinePackage = this.determinePackage.bind(this);
     this.clearToast = this.clearToast.bind(this);
-    this.packageCheck = this.packageCheck.bind(this)
+    this.addToast = this.addToast.bind(this);
     this.state = {
       activeCard: 0,
       pointsDistributed: 0,
@@ -27,14 +27,7 @@ class App extends React.Component {
     const packageId = packages.findIndex((pack) => pack.name === name);
     if (packages[packageId]) {
       if (packages[packageId].points < this.state.pointsDistributed) {
-        this.setState(state => {
-          const message = `Je kunt niet kiezen voor "${packages[packageId].name}" omdat je daarvoor teveel punten hebt verdeeld.`;
-          if (state.toastMessages.includes(message)) {
-            return
-          }
-          state.toastMessages.push(message);
-        });
-        return
+        this.addToast(`Je kunt niet kiezen voor "${packages[packageId].name}" omdat je daarvoor teveel punten hebt verdeeld.`);
       }
       this.setState({
         activeCard: packageId,
@@ -48,35 +41,27 @@ class App extends React.Component {
       pointsDistributed: points
     });
 
-    this.packageCheck(packages[this.state.activeCard].points, points);
+    const requiredPackage = packages.find((pack) => pack.points >= points)
+    if (packages[this.state.activeCard].points < points) {
+      this.setActiveCard(requiredPackage.name);
+      this.addToast(`We hebben je pakket aangepast naar "${requiredPackage.name}" zodat je genoeg punten hebt om te verdelen.`);
+    }
+
+    if (requiredPackage.points !== packages[this.state.activeCard].points && points > 0 && this.state.showLowerPackageToast) {
+      this.addToast(`Op basis van het aantal verdeelde punten zou je ook kunnen kijken naar ons "${requiredPackage.name}" pakket.`);
+      this.setState({
+        showLowerPackageToast: false
+      });
+    }
   }
 
-  packageCheck(packagePoints, distributedPoints) {
-    // this.removeAllToasts();
-
-    const requiredPackage = packages.find((pack) => pack.points >= distributedPoints)
-    if (packagePoints < distributedPoints) {
-      this.setActiveCard(requiredPackage.name);
-      this.setState(state => {
-        const message = `We hebben je pakket aangepast naar "${requiredPackage.name}" zodat je genoeg punten hebt om te verdelen.`;
-        if (state.toastMessages.includes(message)) {
-          return
-        }
-        state.toastMessages.push(message);
-      });
-      return
-    }
-
-    if (requiredPackage.points !== packagePoints && distributedPoints > 0 && this.state.showLowerPackageToast) {
-      this.setState(state => {
-        const message = `Op basis van het aantal verdeelde punten zou je ook kunnen kijken naar ons "${requiredPackage.name}" pakket.`;
-        if (state.toastMessages.includes(message)) {
-          return
-        }
-        state.toastMessages.push(message);
-        state.showLowerPackageToast = false;
-      });
-    }
+  addToast(message) {
+    this.setState(state => {
+      if (state.toastMessages.includes(message)) {
+        return
+      }
+      state.toastMessages.push(message);
+    });
   }
 
   clearToast(message) {

@@ -22,8 +22,35 @@
   }
 }
 
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: solid 1px var(--silver);
+  background-color: var(--white);
+  z-index: 1;
+  margin: 20px auto 0;
+}
+
 .checked > .label {
   box-shadow: 0 0 0 2px var(--orange);
+
+  .circle {
+    border: 0;
+    background-color: var(--orange);
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--white);
+    }
+  }
 }
 
 .icon {

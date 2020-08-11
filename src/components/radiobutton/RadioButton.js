@@ -33,6 +33,7 @@ class RadioButton extends React.Component {
         <label htmlFor={`${this.props.name}-${this.props.value}`} className={styles.label}>
           <img className={styles.icon} src={this.props.icon} alt="peeps_logo" />
           <h2 className={styles.text}>{ this.props.displayValue }</h2>
+          <span className={styles.circle} />
         </label>
       </div>
     );

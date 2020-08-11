@@ -31,10 +31,7 @@ class Card extends React.Component {
           <p>Internetbeveiliging</p>
           <p>Gegarandeerd perfecte wifi</p>
         </div>
-        <div className={styles.cardcheckbox}>
-          <span className={styles.cardcircle} />
-          <span className={styles.cardselecttitle}>{ this.props.active ? "Dit wordt 'm" : 'Bekijk dit pakket' }</span>
-        </div>
+        <span className={styles.cardcircle} />
       </button>
     );
   }
